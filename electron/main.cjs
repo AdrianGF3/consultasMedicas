@@ -1,7 +1,44 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 
+//node lo necesita para las rutas
+const path = require("path");
+
+const {
+  addPaciente,
+  getPacientes,
+  addCita,
+  getCitas,
+  deleteCita
+} = require("./database.cjs");
 // Importante importar la base de datos a la ventana 
-require("./database.cjs");
+
+//sin estos ipcMain.handle react no puede acceder a sqlite
+ipcMain.handle(
+  "add-paciente",
+  (event, paciente) => addPaciente(paciente)
+);
+
+ipcMain.handle(
+  "add-cita",
+  (event, cita) => addCita(cita)
+);
+
+ipcMain.handle(
+  "get-pacientes",
+  () => getPacientes()
+);
+
+ipcMain.handle(
+  "get-citas",
+  () => getCitas()
+);
+
+ipcMain.handle(
+  "delete-cita",
+  (event, id) => deleteCita(id)
+);
+
+//---------------------------------------------------------
 
 function createWindow() {
   const window = new BrowserWindow({
