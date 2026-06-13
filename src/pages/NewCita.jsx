@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 
-function NewAppointment() {
+function NewCita() {
     return (
         <>
 
@@ -45,4 +45,4 @@ function NewAppointment() {
     );
 }
 
-export default NewAppointment;
+export default NewCita;

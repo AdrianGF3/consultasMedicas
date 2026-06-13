@@ -6,13 +6,13 @@ const {
 contextBridge.exposeInMainWorld(
   "api",
   {
-    addPatient: (patient) =>
-      ipcRenderer.invoke("add-patient", patient),
+    addPaciente: (paciente) =>
+      ipcRenderer.invoke("add-paciente", paciente),
 
-    getPatients: () =>
-      ipcRenderer.invoke("get-patients"),
+    getPacientes: () =>
+      ipcRenderer.invoke("get-pacientes"),
 
-    getAppointments: () =>
-      ipcRenderer.invoke("get-appointments")
+    getCitas: () =>
+      ipcRenderer.invoke("get-citas")
   }
 );

@@ -43,7 +43,14 @@ ipcMain.handle(
 function createWindow() {
   const window = new BrowserWindow({
     width: 1200,
-    height: 800
+    height: 800,
+
+    //si no ponemos las preferencias de la web sale undefined y por eso no se cargaba la base de datos >:v
+    webPreferences: {
+      preload: path.join(__dirname, "preload.cjs"),
+      contextIsolation: true,
+      nodeIntegration: false
+    }
   });
 
   //solo servira en desarrollo

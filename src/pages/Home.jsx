@@ -1,6 +1,25 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
 function Home() {
+    const [citas, setCitas] = useState([]);
+    const [filtro, setFiltro] = useState("");
+
+    useEffect(() => {
+        // Logica para obtener las citas
+        loadCitas();
+    }, []);
+
+    //cargar citas desde la base de datos
+    async function loadCitas() {
+        const data = await window.api.getCitas();
+        setCitas(data);
+    }
+
+    //filtro de citas por dni
+    const citasFiltradas = citas.filter((cita) =>
+        cita.paciente_dni.includes(filtro)
+    );
 
     return (
         <>
@@ -13,6 +32,7 @@ function Home() {
                 type="text"
                 placeholder="Buscar por DNI"
                 value={filtro}
+                onChange={(e) => setFiltro(e.target.value)}
             />
 
             <table>
@@ -36,7 +56,11 @@ function Home() {
                             <td>{cita.fecha}</td>
                             <td>{cita.descripcion}</td>
                             <td>
-                                <button>Eliminar</button>
+                                <button
+                                    onClick={async () => {
+                                        await window.api.deleteCita(cita.id);
+                                        loadCitas();
+                                    }}>Eliminar</button>
                             </td>
                         </tr>
                     ))}

@@ -1,7 +1,22 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
-function Patients() {
+function Pacientes() {
+    const [pacientes, setPacientes] = useState([]);
+
+    useEffect(() => {
+        loadPacientes();
+    }, []);
+
+    //funcion para cargar pacientes
+    async function loadPacientes() {
+        try {
+            const data = await window.api.getPacientes();
+            setPacientes(data);
+        } catch (error) {
+            console.error("Error cargando pacientes:", error);
+        }
+    }
     return (
         <>
 
@@ -39,4 +54,4 @@ function Patients() {
     );
 }
 
-export default Patients;
+export default Pacientes;
