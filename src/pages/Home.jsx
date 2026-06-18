@@ -39,48 +39,53 @@ function Home() {
 
     return (
         <>
-            <Navbar />
+            <div className="layout">
+                
+                <Navbar />
 
-            <h1>Citas Médicas</h1>
+                <div className="content">
 
-            //filtro de citas por dni
-            <input
-                type="text"
-                placeholder="Buscar por DNI"
-                value={filtro}
-                onChange={(e) => setFiltro(e.target.value)}
-            />
+                    <h1>Citas Médicas</h1>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>DNI</th>
-                        <th>Paciente</th>
-                        <th>Teléfono</th>
-                        <th>Fecha</th>
-                        <th>Dolencia</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
+                    <input
+                        type="text"
+                        placeholder="Buscar por DNI"
+                        value={filtro}
+                        onChange={(e) => setFiltro(e.target.value)}
+                    />
 
-                <tbody>
-                    {citas.map((cita) => (
-                        <tr key={cita.id}>
-                            <td>{cita.dni}</td>
-                            <td>{cita.nombre}</td>
-                            <td>{cita.telefono}</td>
-                            <td>{cita.fecha}</td>
-                            <td>{cita.descripcion}</td>
-                            <td>
-                                <button
-                                    onClick={() =>
-                                        eliminarCita(cita.id)
-                                    }>Eliminar</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DNI</th>
+                                <th>Paciente</th>
+                                <th>Teléfono</th>
+                                <th>Fecha</th>
+                                <th>Dolencia</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {citasFiltradas.map((cita) => (
+                                <tr key={cita.id}>
+                                    <td>{cita.dni}</td>
+                                    <td>{cita.nombre}</td>
+                                    <td>{cita.telefono}</td>
+                                    <td>{cita.fecha}</td>
+                                    <td>{cita.descripcion}</td>
+                                    <td>
+                                        <button
+                                            onClick={() =>
+                                                eliminarCita(cita.id)
+                                            }>Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </>
     );
 }

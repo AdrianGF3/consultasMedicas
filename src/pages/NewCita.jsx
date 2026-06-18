@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 
 function NewCita() {
-    const [pacientes, setPacientes] = useState([]); 
+    const [pacientes, setPacientes] = useState([]);
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [pacienteDni, setPacienteDni] = useState("");
@@ -39,64 +39,68 @@ function NewCita() {
 
     return (
         <>
+            <div className="layout">
 
-            <Navbar />
+                <Navbar />
+                
+                <div className="content">
+                    <h1>Nueva Cita</h1>
 
-            <h1>Nueva Cita</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>Paciente</label>
+                            <br />
+                            <select
+                                value={pacienteDni}
+                                onChange={(e) =>
+                                    setPacienteDni(e.target.value)
+                                }
+                                required
+                            >
+                                <option value="">
+                                    Selecciona un paciente
+                                </option>
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Paciente</label>
-                    <br />
-                    <select
-                        value={pacienteDni}
-                        onChange={(e) =>
-                            setPacienteDni(e.target.value)
-                        }
-                        required
-                    >
-                        <option value="">
-                            Selecciona un paciente
-                        </option>
+                                {pacientes.map((p) => (
+                                    <option key={p.dni} value={p.dni}>
+                                        {p.nombre} ({p.dni})
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                        {pacientes.map((p) => (
-                            <option key={p.dni} value={p.dni}>
-                                {p.nombre} ({p.dni})
-                            </option>
-                        ))}
-                    </select>
+                        <br />
+
+                        <div>
+                            <label>Fecha</label>
+                            <br />
+                            <input type="date" value={fecha}
+                                onChange={(e) =>
+                                    setFecha(e.target.value)
+                                }
+                                required />
+                        </div>
+
+                        <br />
+
+                        <div>
+                            <label>Descripción de la dolencia</label>
+                            <br />
+                            <textarea value={descripcion}
+                                onChange={(e) =>
+                                    setDescripcion(e.target.value)
+                                }
+                                required></textarea>
+                        </div>
+
+                        <br />
+
+                        <button type="submit">
+                            Guardar
+                        </button>
+                    </form>
                 </div>
-
-                <br />
-
-                <div>
-                    <label>Fecha</label>
-                    <br />
-                    <input type="date" value={fecha}
-                        onChange={(e) =>
-                            setFecha(e.target.value)
-                        }
-                        required />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Descripción de la dolencia</label>
-                    <br />
-                    <textarea value={descripcion}
-                        onChange={(e) =>
-                            setDescripcion(e.target.value)
-                        }
-                        required></textarea>
-                </div>
-
-                <br />
-
-                <button type="submit">
-                    Guardar
-                </button>
-            </form>
+            </div>
 
         </>
     );

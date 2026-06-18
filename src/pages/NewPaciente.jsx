@@ -22,7 +22,7 @@ function NewPaciente() {
             setNombre("");
             setDni("");
             setTelefono("");
-            
+
         } catch (error) {
             console.error("Error:", error);
             alert("Error al guardar paciente");
@@ -31,40 +31,45 @@ function NewPaciente() {
 
     return (
         <>
+            <div className="layout">
+                
+                <Navbar />
 
-            <Navbar />
+                <div className="content">
 
-            <h1>Nuevo Paciente</h1>
+                    <h1>Nuevo Paciente</h1>
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre</label>
-                    <br />
-                    <input value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>Nombre</label>
+                            <br />
+                            <input value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                        </div>
+
+                        <br />
+
+                        <div>
+                            <label>DNI</label>
+                            <br />
+                            <input value={dni} onChange={(e) => setDni(e.target.value)} />
+                        </div>
+
+                        <br />
+
+                        <div>
+                            <label>Teléfono</label>
+                            <br />
+                            <input value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+                        </div>
+
+                        <br />
+
+                        <button type="submit">
+                            Guardar
+                        </button>
+                    </form>
                 </div>
-
-                <br />
-
-                <div>
-                    <label>DNI</label>
-                    <br />
-                    <input value={dni} onChange={(e) => setDni(e.target.value)} />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Teléfono</label>
-                    <br />
-                    <input value={telefono} onChange={(e) => setTelefono(e.target.value)} />
-                </div>
-
-                <br />
-
-                <button type="submit">
-                    Guardar
-                </button>
-            </form>
+            </div>
         </>
     );
 }
