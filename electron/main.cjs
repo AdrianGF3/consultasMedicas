@@ -8,7 +8,8 @@ const {
   getPacientes,
   addCita,
   getCitas,
-  deleteCita
+  deleteCita,
+  deletePaciente   
 } = require("./database.cjs");
 // Importante importar la base de datos a la ventana 
 
@@ -36,6 +37,11 @@ ipcMain.handle(
 ipcMain.handle(
   "delete-cita",
   (event, id) => deleteCita(id)
+);
+
+ipcMain.handle(
+  "delete-paciente",
+  (event, dni) => deletePaciente(dni)
 );
 
 //---------------------------------------------------------

@@ -103,12 +103,15 @@ function getPacientes() {
 //obtener citas
 function getCitas() {
   return new Promise((resolve, reject) => {
-    db.all(
-      "SELECT * FROM citas",
+    db.all( //inerjoin para poder traer telefono y fecha
+      'SELECT citas.id, pacientes.dni, pacientes.nombre, pacientes.telefono, citas.fecha, citas.descripcion FROM citas INNER JOIN pacientes ON citas.paciente_dni = pacientes.dni',
       [],
       (err, rows) => {
-        if (err) reject(err);
-        else resolve(rows);
+        if (err) { 
+          reject(err);
+        } else {
+          resolve(rows);
+        }
       }
     );
   });
@@ -122,6 +125,23 @@ function deleteCita(id) {
     db.run(
       `DELETE FROM citas WHERE id = ?`,
       [id],
+      function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      }
+    );
+  });
+}
+
+//eliminar paciente
+function deletePaciente(dni) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      "DELETE FROM pacientes WHERE dni = ?",
+      [dni],
       function (err) {
         if (err) reject(err);
         else resolve();
@@ -137,5 +157,6 @@ module.exports = {
   getPacientes,
   addCita,
   getCitas,
-  deleteCita
+  deleteCita,
+  deletePaciente
 };

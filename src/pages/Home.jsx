@@ -12,13 +12,29 @@ function Home() {
 
     //cargar citas desde la base de datos
     async function loadCitas() {
-        const data = await window.api.getCitas();
-        setCitas(data);
+        try {
+            const data = await window.api.getCitas();
+            setCitas(data);
+        } catch (error) {
+            console.error("Error cargando citas:", error);
+        }
+    }
+
+    //eliminar cita por id
+    async function eliminarCita(id) {
+        try {
+            await window.api.deleteCita(id);
+            loadCitas();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     //filtro de citas por dni
     const citasFiltradas = citas.filter((cita) =>
-        cita.paciente_dni.includes(filtro)
+        cita.dni
+            .toLowerCase()
+            .includes(filtro.toLowerCase())
     );
 
     return (
@@ -57,10 +73,9 @@ function Home() {
                             <td>{cita.descripcion}</td>
                             <td>
                                 <button
-                                    onClick={async () => {
-                                        await window.api.deleteCita(cita.id);
-                                        loadCitas();
-                                    }}>Eliminar</button>
+                                    onClick={() =>
+                                        eliminarCita(cita.id)
+                                    }>Eliminar</button>
                             </td>
                         </tr>
                     ))}

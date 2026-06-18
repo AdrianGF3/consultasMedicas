@@ -17,6 +17,12 @@ function Pacientes() {
             console.error("Error cargando pacientes:", error);
         }
     }
+
+    //eliminar paciente
+    async function eliminarPaciente(dni) {
+        await window.api.deletePaciente(dni);
+        loadPacientes();
+    }
     return (
         <>
 
@@ -42,8 +48,9 @@ function Pacientes() {
                             <td>{paciente.telefono}</td>
 
                             <td>
-                                <button>Editar</button>
-                                <button>Eliminar</button>
+                                <button onClick={() =>
+                                    eliminarPaciente(paciente.dni)
+                                }>Eliminar</button>
                             </td>
                         </tr>
                     ))}
