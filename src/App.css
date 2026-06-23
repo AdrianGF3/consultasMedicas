@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f7fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-top: 0;
+  color: #1f2937;
+}

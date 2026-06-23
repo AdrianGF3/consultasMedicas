@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import "../styles/pages.css";
 
 function NewPaciente() {
     const [nombre, setNombre] = useState("");
@@ -17,7 +18,8 @@ function NewPaciente() {
                 telefono
             });
 
-            alert("Paciente guardado");
+            //En Electron + React (sobre todo con Vite), el alert() puede dejar el foco del renderer en un estado raro
+            //alert("Paciente guardado");
 
             setNombre("");
             setDni("");
@@ -25,7 +27,7 @@ function NewPaciente() {
 
         } catch (error) {
             console.error("Error:", error);
-            alert("Error al guardar paciente");
+            //alert("Error al guardar paciente");
         }
     }
 
@@ -35,36 +37,36 @@ function NewPaciente() {
                 
                 <Navbar />
 
-                <div className="content">
+                <div className="page">
 
-                    <h1>Nuevo Paciente</h1>
+                    <h1 className="page-title">Nuevo Paciente</h1>
 
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Nombre</label>
+                    <form className="form-card" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label className="form-label">Nombre</label>
                             <br />
-                            <input value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                            <input className="form-input" value={nombre} onChange={(e) => setNombre(e.target.value)} />
                         </div>
 
                         <br />
 
                         <div>
-                            <label>DNI</label>
+                            <label className="form-label">DNI</label>
                             <br />
-                            <input value={dni} onChange={(e) => setDni(e.target.value)} />
+                            <input className="form-input" value={dni} onChange={(e) => setDni(e.target.value)} />
                         </div>
 
                         <br />
 
-                        <div>
-                            <label>Teléfono</label>
+                        <div className="form-group">
+                            <label className="form-label">Teléfono</label>
                             <br />
-                            <input value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+                            <input className="form-input" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
                         </div>
 
                         <br />
 
-                        <button type="submit">
+                        <button className="save-btn" type="submit">
                             Guardar
                         </button>
                     </form>

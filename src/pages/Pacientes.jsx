@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 
 function Pacientes() {
     const [pacientes, setPacientes] = useState([]);
+    const [pacienteAEliminar, setPacienteAEliminar] = useState(null);
 
     useEffect(() => {
         loadPacientes();
@@ -18,31 +19,28 @@ function Pacientes() {
         }
     }
 
-    //eliminar paciente
-    async function eliminarPaciente(dni) {
-        const confirmacion = window.confirm(
-            "¿Seguro que quieres eliminar este paciente? Esta accion no se puede deshacer!"
-        );
+    //confirmar eliminacion de paciente
+    async function confirmarEliminacion() {
+        try {
+            await window.api.deletePaciente(pacienteAEliminar);
 
-        if (!confirmacion) return;
-
-        await window.api.deletePaciente(dni);
-
-        alert("Paciente eliminado correctamente");
-
-        loadPacientes();
+            setPacienteAEliminar(null);
+            loadPacientes();
+        } catch (error) {
+            console.error("Error eliminando paciente:", error);
+        }
     }
     return (
         <>
             <div className="layout">
 
                 <Navbar />
-                
-                <div className="content">
 
-                    <h1>Pacientes</h1>
+                <div className="page">
 
-                    <table>
+                    <h1 className="page-title">Pacientes</h1>
+
+                    <table className="data-table">
                         <thead>
                             <tr>
                                 <th>DNI</th>
@@ -60,14 +58,53 @@ function Pacientes() {
                                     <td>{paciente.telefono}</td>
 
                                     <td>
-                                        <button onClick={() =>
-                                            eliminarPaciente(paciente.dni)
-                                        }>Eliminar</button>
+                                        <button className="delete-btn" onClick={() =>
+                                            setPacienteAEliminar(paciente.dni)
+                                        }>
+                                            Eliminar
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+
+                    {pacienteAEliminar && (
+                        <div className="modal-overlay">
+                            <div className="modal">
+                                <h3>
+                                    Confirmar eliminación
+                                </h3>
+
+                                <p>
+                                    ¿Seguro que quieres eliminar este paciente?
+                                </p>
+
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        gap: "10px",
+                                        marginTop: "15px"
+                                    }}
+                                >
+                                    <button
+                                        onClick={() =>
+                                            setPacienteAEliminar(null)
+                                        }
+                                    >
+                                        Cancelar
+                                    </button>
+
+                                    <button
+                                        className="delete-btn"
+                                        onClick={confirmarEliminacion}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </>

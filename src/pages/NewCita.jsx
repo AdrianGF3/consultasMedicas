@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import "../styles/pages.css";
 
 function NewCita() {
     const [pacientes, setPacientes] = useState([]);
@@ -26,14 +27,14 @@ function NewCita() {
                 descripcion
             });
 
-            alert("Cita guardada");
+            //alert("Cita guardada");
 
             setPacienteDni("");
             setFecha("");
             setDescripcion("");
         } catch (error) {
             console.error(error);
-            alert("Error al guardar la cita");
+            //alert("Error al guardar la cita");
         }
     }
 
@@ -42,15 +43,16 @@ function NewCita() {
             <div className="layout">
 
                 <Navbar />
-                
-                <div className="content">
-                    <h1>Nueva Cita</h1>
 
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Paciente</label>
+                <div className="page">
+                    <h1 className="page-title">Nueva Cita</h1>
+
+                    <form className="form-card" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label className="form-label">Paciente</label>
                             <br />
                             <select
+                                className="form-input"
                                 value={pacienteDni}
                                 onChange={(e) =>
                                     setPacienteDni(e.target.value)
@@ -71,10 +73,10 @@ function NewCita() {
 
                         <br />
 
-                        <div>
-                            <label>Fecha</label>
+                        <div className="form-group">
+                            <label className="form-label">Fecha</label>
                             <br />
-                            <input type="date" value={fecha}
+                            <input className="form-input" type="date" value={fecha}
                                 onChange={(e) =>
                                     setFecha(e.target.value)
                                 }
@@ -83,19 +85,21 @@ function NewCita() {
 
                         <br />
 
-                        <div>
-                            <label>Descripción de la dolencia</label>
+                        <div className="form-group">
+                            <label className="form-label">Descripción de la dolencia</label>
                             <br />
-                            <textarea value={descripcion}
+                            <textarea className="form-input form-textarea" value={descripcion}
                                 onChange={(e) =>
                                     setDescripcion(e.target.value)
                                 }
-                                required></textarea>
+                                required>
+
+                            </textarea>
                         </div>
 
                         <br />
 
-                        <button type="submit">
+                        <button className="save-btn" type="submit">
                             Guardar
                         </button>
                     </form>
