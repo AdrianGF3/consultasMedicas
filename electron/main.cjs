@@ -9,7 +9,7 @@ const {
   addCita,
   getCitas,
   deleteCita,
-  deletePaciente   
+  deletePaciente
 } = require("./database.cjs");
 // Importante importar la base de datos a la ventana 
 
@@ -59,11 +59,18 @@ function createWindow() {
     }
   });
 
-  //solo servira en desarrollo
-  window.loadURL("http://localhost:5173");
+  if (app.isPackaged) {
+    // Ejecutable instalado
+    window.loadFile(
+      path.join(__dirname, "../dist/index.html")
+    );
+  } else {
+    // Desarrollo
+    window.loadURL("http://localhost:5173");
+    }
 
-  //herramientas de desarrollo
-  window.webContents.openDevTools();
+    // herramientas de desarrollo
+    window.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

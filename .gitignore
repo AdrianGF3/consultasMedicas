@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+node_modules/
+dist/
+release/
+win-unpacked/
+*.exe
+*.db

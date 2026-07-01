@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter , Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Pacientes from "./pages/Pacientes";
@@ -8,14 +8,14 @@ import NewCita from "./pages/NewCita";
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pacientes" element={<Pacientes />} />
         <Route path="/new-paciente" element={<NewPaciente />} />
         <Route path="/new-cita" element={<NewCita />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
