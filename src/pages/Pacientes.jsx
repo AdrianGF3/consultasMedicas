@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import "../styles/pages.css";
 
 function Pacientes() {
     const [pacientes, setPacientes] = useState([]);
     const [pacienteAEliminar, setPacienteAEliminar] = useState(null);
+    const [filtro, setFiltro] = useState("");
 
     useEffect(() => {
         loadPacientes();
@@ -32,12 +34,12 @@ function Pacientes() {
     }
 
     //filtro de citas por dni
-    const citasFiltradas = citas.filter((cita) =>
-        cita.dni
+    const PacientesFiltrados = pacientes.filter((paciente) =>
+        paciente.dni
             .toLowerCase()
             .includes(filtro.toLowerCase())
     );
-    
+
     return (
         <>
             <div className="layout">
@@ -67,7 +69,7 @@ function Pacientes() {
                         </thead>
 
                         <tbody>
-                            {pacientes.map((paciente) => (
+                            {PacientesFiltrados.map((paciente) => (
                                 <tr key={paciente.dni}>
                                     <td>{paciente.dni}</td>
                                     <td>{paciente.nombre}</td>
