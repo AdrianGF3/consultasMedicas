@@ -13,15 +13,38 @@
   color: rgb(168, 85, 247);
 }
 
-.modal {
-  background: white;
-  padding: 25px;
+.detalle-cita {
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
 
-  width: 500px;
-  max-width: 90%;
+    width: 350px;
+    max-width: 90%;
+    max-height: 80vh;
 
-  max-height: 80vh;
-  overflow-y: auto;
+    overflow-y: auto;
+
+    background: white;
+    padding: 20px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+
+    z-index: 1000;
+
+    border: 1px solid black;
+}
+
+.detalle-cita h2 {
+    margin-top: 0;
+    color: rgb(168, 85, 247);
+}
+
+.detalle-cita .descripcion {
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .descripcion {

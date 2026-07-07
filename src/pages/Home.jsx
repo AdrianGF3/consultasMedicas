@@ -100,42 +100,40 @@ function Home() {
                         </tbody>
                     </table>
                     {citaSeleccionada && (
-                        <div className="modal-overlay">
-                            <div className="modal">
-                                <h2>Detalle de la cita</h2>
+                        <div className="detalle-cita">
+                            <h2>Detalle de la cita</h2>
 
-                                <p>
-                                    <strong>Paciente:</strong>{" "}
-                                    {citaSeleccionada.nombre}
-                                </p>
+                            <p>
+                                <strong>Paciente:</strong>{" "}
+                                {citaSeleccionada.nombre}
+                            </p>
 
-                                <p>
-                                    <strong>DNI:</strong>{" "}
-                                    {citaSeleccionada.dni}
-                                </p>
+                            <p>
+                                <strong>DNI:</strong>{" "}
+                                {citaSeleccionada.dni}
+                            </p>
 
-                                <p>
-                                    <strong>Fecha:</strong>{" "}
-                                    {citaSeleccionada.fecha}
-                                </p>
+                            <p>
+                                <strong>Fecha:</strong>{" "}
+                                {citaSeleccionada.fecha}
+                            </p>
 
-                                <p>
-                                    <strong>Dolencia:</strong>
-                                </p>
+                            <p>
+                                <strong>Dolencia:</strong>
+                            </p>
 
-                                <p className="descripcion">
-                                    {citaSeleccionada.descripcion}
-                                </p>
+                            <p className="descripcion">
+                                {citaSeleccionada.descripcion}
+                            </p>
 
-                                <button
-                                    className="save-btn"
-                                    onClick={() =>
-                                        setCitaSeleccionada(null)
-                                    }
-                                >
-                                    Cerrar
-                                </button>
-                            </div>
+                            <button
+                                className="save-btn"
+                                onClick={() =>
+                                    setCitaSeleccionada(null)
+                                }
+                            >
+                                Cerrar
+                            </button>
                         </div>
                     )}
                 </div>

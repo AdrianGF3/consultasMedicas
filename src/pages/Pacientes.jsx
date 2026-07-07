@@ -30,6 +30,14 @@ function Pacientes() {
             console.error("Error eliminando paciente:", error);
         }
     }
+
+    //filtro de citas por dni
+    const citasFiltradas = citas.filter((cita) =>
+        cita.dni
+            .toLowerCase()
+            .includes(filtro.toLowerCase())
+    );
+    
     return (
         <>
             <div className="layout">
@@ -39,6 +47,14 @@ function Pacientes() {
                 <div className="page">
 
                     <h1 className="page-title">Pacientes</h1>
+
+                    <input
+                        className="search-input"
+                        type="text"
+                        placeholder="Buscar por DNI"
+                        value={filtro}
+                        onChange={(e) => setFiltro(e.target.value)}
+                    />
 
                     <table className="data-table">
                         <thead>
@@ -70,11 +86,11 @@ function Pacientes() {
                     </table>
 
                     {pacienteAEliminar && (
-                        <div className="modal-overlay">
-                            <div className="modal">
-                                <h3>
+                        <div className="detalle-cita">
+
+                                <h2>
                                     Confirmar eliminación
-                                </h3>
+                                </h2>
 
                                 <p>
                                     ¿Seguro que quieres eliminar este paciente?
@@ -102,7 +118,7 @@ function Pacientes() {
                                         Eliminar
                                     </button>
                                 </div>
-                            </div>
+                            
                         </div>
                     )}
                 </div>
